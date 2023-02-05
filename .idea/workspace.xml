@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fdf057c4-3082-43be-8fb1-35af4c98c5c5" name="Changes" comment="QuickDraw's first step; got a bubble in a black square">
-      <change afterPath="$PROJECT_DIR$/public/libraries/p5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/libraries/p5.sound.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/libraries/p5.sound.min.js" afterDir="false" />
+    <list default="true" id="fdf057c4-3082-43be-8fb1-35af4c98c5c5" name="Changes" comment="&quot;drawing&quot; included, socket configured">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/sketch.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/sketch.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
@@ -72,8 +68,16 @@
       <option name="presentableId" value="Default" />
       <updated>1675452335511</updated>
       <workItem from="1675452336745" duration="1176000" />
-      <workItem from="1675621102403" duration="3517000" />
+      <workItem from="1675621102403" duration="4163000" />
     </task>
+    <task id="LOCAL-00001" summary="&quot;drawing&quot; included, socket configured">
+      <created>1675624815212</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1675624815213</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -93,6 +97,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="QuickDraw's first step; got a bubble in a black square" />
-    <option name="LAST_COMMIT_MESSAGE" value="QuickDraw's first step; got a bubble in a black square" />
+    <MESSAGE value="&quot;drawing&quot; included, socket configured" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;drawing&quot; included, socket configured" />
   </component>
 </project>
