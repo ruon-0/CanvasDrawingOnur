@@ -1,6 +1,16 @@
 // Based off of Shawn Van Every's Live Web
 // http://itp.nyu.edu/~sve204/liveweb_fall2013/week3.html
 
+
+var blobs = [];
+
+function Blob(id, x, y, r) {
+    this.id = id;
+    this.x = x;
+    this.y = y;
+    this.r = r;
+}
+
 // Using express: http://expressjs.com/
 var express = require('express');
 // Create the app
@@ -24,34 +34,87 @@ app.use(express.static('public'));
 // WebSockets work with the HTTP server
 var io = require('socket.io')(server);
 
+setInterval(heartbeat, 240);
+
+function heartbeat() {
+    io.sockets.emit('heartbeat', blobs);
+}
+
 // Register a callback function to run when we have an individual connection
 // This is run for each individual user that connects
-io.sockets.on('connection',
+io.sockets.on(
+    'connection',
     // We are given a websocket object in our function
-    function (socket) {
+    function(socket) {
+        console.log('We have a new client: ' + socket.id);
 
-        console.log("We have a new client: " + socket.id);
+        socket.on('start', function(data) {
+            console.log(socket.id + ' ' + data.x + ' ' + data.y + ' ' + data.r);
+            var blob = new Blob(socket.id, data.x, data.y, data.r);
+            blobs.push(blob);
 
-        // When this user emits, client side: socket.emit('otherevent',some data);
-        socket.on('mouse',
-            function(data) {
-                // Data comes in as whatever was sent, including objects
-                console.log("Received: 'mouse' " + data.x + " " + data.y);
 
-                // Send it to all other clients
-                socket.broadcast.emit('mouse', data);
+        });
 
-                // This is a way to send to everyone including sender
-                // io.sockets.emit('message', "this goes to everyone");
-
+        socket.on('update', function(data) {
+            //console.log(socket.id + " " + data.x + " " + data.y + " " + data.r);
+            var blobi = new Blob(0, 0, 0);
+            for (var i = 0; i < blobs.length; i++) {
+                if (socket.id == blobs[i].id) {
+                    blobi = blobs[i];
+                    blobi.x = data.x;
+                    blobi.y = data.y;
+                    blobi.r = data.r;
+                }
             }
-        );
+            // blob.x = data.x;
+            // blob.y = data.y;
+            // blob.r = data.r;
+        });
 
         socket.on('disconnect', function() {
-            console.log("Client has disconnected");
+            console.log('Client has disconnected');
         });
     }
 );
+// io.sockets.on('connection',
+//     // We are given a websocket object in our function
+//     function (socket) {
+//
+//         console.log("We have a new client: " + socket.id);
+//
+//         // When this user emits, client side: socket.emit('otherevent',some data);
+//         socket.on('start',
+//             function(data) {
+//                 console.log(socket.id + " " + data.x + " " + data.y + " " + data.r);
+//                 var blob = new Blob(socket.id, data.x, data.y, data.r);
+//                 blobs.push(blob);
+//             }
+//         );
+//
+//
+//         socket.on('update',
+//             function(data) {
+//                 // console.log(socket.id + " " + data.x + " " + data.y + " " + data.r);
+//                 // var blob = new Blob(socket.id, data.x, data.y, data.r);
+//                 // blobs.push(blob);
+//                 var blob;
+//                 for(var i=0; i<blobs.length; i++) {
+//                     if(socket.id == blobs[i].id) {
+//                         blob = blobs[i];
+//                     }
+//                 }
+//                 blob.x = data.x;
+//                 blob.y = data.y;
+//                 blob.r = data.r;
+//             }
+//         );
+//
+//         socket.on('disconnect', function() {
+//             console.log("Client has disconnected");
+//         });
+//     }
+// );
 
 // var express = require('express');
 // var app = express();
